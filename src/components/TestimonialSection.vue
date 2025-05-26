@@ -52,7 +52,8 @@ const testimonials = [
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/functions' as *;
 
 .testimonial-section {
   padding: $spacing-xxl 0;

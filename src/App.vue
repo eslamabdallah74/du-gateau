@@ -16,7 +16,7 @@ import TheFooter from './components/TheFooter.vue';
 </script>
 
 <style lang="scss">
-@import './assets/styles/main.scss';
+@use './assets/styles/main' as *;
 
 main {
   min-height: calc(100vh - 300px);

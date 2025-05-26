@@ -21,21 +21,21 @@
         
         <div class="header-actions">
           <button class="icon-button" @click="toggleUserDropdown">
-            <mdi-icon name="account" />
+            <span class="icon">👤</span>
           </button>
           <button class="icon-button" @click="toggleSearchBar">
-            <mdi-icon name="magnify" />
+            <span class="icon">🔍</span>
           </button>
           <button class="icon-button" @click="openCart">
-            <mdi-icon name="cart" />
+            <span class="icon">🛒</span>
             <span v-if="cartStore.itemCount > 0" class="badge">{{ cartStore.itemCount }}</span>
           </button>
           <button class="icon-button" @click="openWishlist">
-            <mdi-icon name="heart" />
+            <span class="icon">❤️</span>
             <span v-if="wishlistStore.itemCount > 0" class="badge">{{ wishlistStore.itemCount }}</span>
           </button>
           <button class="icon-button" @click="toggleSettings">
-            <mdi-icon name="cog" />
+            <span class="icon">⚙️</span>
           </button>
         </div>
       </div>
@@ -43,7 +43,7 @@
       <div v-if="showSearch" class="search-bar">
         <input type="text" placeholder="Search for products..." v-model="searchQuery" @keyup.enter="search" />
         <button @click="search">
-          <mdi-icon name="magnify" />
+          <span class="icon">🔍</span>
         </button>
       </div>
       
@@ -82,13 +82,26 @@ const showUserDropdown = ref(false);
 const searchQuery = ref('');
 const isScrolled = ref(false);
 
-// Handle scroll event to change header appearance
+let ticking = false;
+let lastScrollY = 0;
+const scrollDownThreshold = 60;
+const scrollUpThreshold = 30;
+let previousScrollState = false;
+
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50;
+  isScrolled.value = window.scrollY > 60;
+  console.log('isScrolled', isScrolled.value);
+  console.log('window.scrollY', window.scrollY);
+  
 };
 
+
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+  // Initial check
+  isScrolled.value = window.scrollY > scrollDownThreshold;
+  previousScrollState = isScrolled.value;
+  // Use passive listener for better performance
+  window.addEventListener('scroll', handleScroll, { passive: true });
 });
 
 onUnmounted(() => {
@@ -138,8 +151,8 @@ const logout = () => {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
-@import '@/assets/styles/functions';
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/functions' as *;
 
 .header {
   background-color: $white;
@@ -147,7 +160,8 @@ const logout = () => {
   position: sticky;
   top: 0;
   z-index: 100;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
   
   .container {
     position: relative;
@@ -159,30 +173,34 @@ const logout = () => {
     align-items: center;
     padding: $spacing-md 0;
     transition: padding 0.3s ease;
+    will-change: padding;
   }
   
   .logo-container {
     width: 120px;
-    transition: all 0.3s ease;
+    transition: width 0.3s ease;
+    will-change: width;
     
     .logo {
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: all 0.3s ease;
+      transition: flex-direction 0.3s ease, align-items 0.3s ease;
       
       img {
         width: 100%;
         height: auto;
         object-fit: contain;
         transition: width 0.3s ease;
+        will-change: width;
       }
       
       .logo-text {
         color: $primary;
         font-size: 1.5rem;
         margin-top: $spacing-xs;
-        transition: font-size 0.3s ease;
+        transition: font-size 0.3s ease, margin 0.3s ease;
+        will-change: font-size, margin-top, margin-left;
       }
     }
   }

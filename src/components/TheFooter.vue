@@ -67,7 +67,8 @@ const validateEmail = (email: string): boolean => {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/functions' as *;
 
 .footer {
   background: linear-gradient(to right, $primary, $primary-light, $primary, $primary-light, $primary);

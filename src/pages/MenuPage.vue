@@ -44,7 +44,8 @@ const filteredProducts = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/functions' as *;
 
 .menu-page {
   padding: $spacing-xl 0;

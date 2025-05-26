@@ -148,7 +148,8 @@ const toggleWishlist = () => {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/functions' as *;
 
 .product-detail-page {
   padding: $spacing-xl 0;

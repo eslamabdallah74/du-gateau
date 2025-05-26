@@ -84,7 +84,8 @@
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/functions' as *;
 
 .about-page {
   padding: $spacing-xl 0;

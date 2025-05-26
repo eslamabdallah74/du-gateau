@@ -24,7 +24,8 @@ defineProps<{
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
+@use '@/assets/styles/variables' as *;
+@use '@/assets/styles/functions' as *;
 
 .category-section {
   padding: $spacing-xl 0;
