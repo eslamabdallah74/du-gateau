@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
+    "build:deploy": "npm run build && npm run deploy",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist"
   },

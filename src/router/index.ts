@@ -12,7 +12,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: HomePage,
-    meta: { title: 'Du Gâteau - Artisan Bakery' }
+    meta: { title: 'Du Gâteau' }
   },
   {
     path: '/about',
