@@ -8,7 +8,6 @@
             <li><router-link to="/about">Our Story</router-link></li>
             <li><router-link to="/menu">Menu</router-link></li>
             <li><router-link to="/contact">Contact</router-link></li>
-            <li><router-link to="/policy">Policy</router-link></li>
           </ul>
         </div>
         
