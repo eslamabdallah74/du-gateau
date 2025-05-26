@@ -1,0 +1,14 @@
+@use "sass:color";
+
+// Modern replacements for deprecated color functions
+@function darken-color($color, $amount) {
+  @return color.scale($color, $lightness: $amount * -1%);
+}
+
+@function lighten-color($color, $amount) {
+  @return color.scale($color, $lightness: $amount);
+}
+
+@function adjust-color($color, $lightness: 0, $alpha: 0) {
+  @return color.adjust($color, $lightness: $lightness, $alpha: $alpha);
+}

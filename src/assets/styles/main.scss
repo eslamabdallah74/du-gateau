@@ -1,0 +1,163 @@
+@import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-base;
+  background-color: $background;
+  color: $text;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-accent;
+  margin-bottom: $spacing-md;
+  font-weight: 500;
+}
+
+.script-text {
+  font-family: $font-family-script;
+}
+
+a {
+  text-decoration: none;
+  color: $text;
+  transition: color $transition-normal;
+  
+  &:hover {
+    color: $primary;
+  }
+}
+
+button, .button {
+  background-color: $primary;
+  color: $white;
+  border: none;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  font-family: $font-family-base;
+  font-weight: 500;
+  transition: background-color $transition-normal;
+  display: inline-block;
+  text-align: center;
+  
+  &:hover {
+    background-color: $primary-dark;
+  }
+  
+  &.secondary {
+    background-color: $secondary;
+    color: $primary-dark;
+    
+    &:hover {
+      background-color: $primary-light;
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity $transition-normal;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $transition-normal;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// Form styles
+input, textarea, select {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  border: 1px solid #ddd;
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-md;
+  font-family: $font-family-base;
+  background-color: $white;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: $spacing-xs;
+  color: $text;
+  font-weight: 500;
+}
+
+// Responsive utilities
+.hide-mobile {
+  @media (max-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+.hide-desktop {
+  @media (min-width: $breakpoint-md) {
+    display: none !important;
+  }
+}
+
+// Grid system
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -$spacing-md;
+}
+
+.col {
+  padding: 0 $spacing-md;
+  flex: 1;
+  
+  @media (max-width: $breakpoint-md) {
+    flex: 0 0 100%;
+    margin-bottom: $spacing-md;
+  }
+}
+
+.col-1 { flex: 0 0 8.333333%; }
+.col-2 { flex: 0 0 16.666667%; }
+.col-3 { flex: 0 0 25%; }
+.col-4 { flex: 0 0 33.333333%; }
+.col-5 { flex: 0 0 41.666667%; }
+.col-6 { flex: 0 0 50%; }
+.col-7 { flex: 0 0 58.333333%; }
+.col-8 { flex: 0 0 66.666667%; }
+.col-9 { flex: 0 0 75%; }
+.col-10 { flex: 0 0 83.333333%; }
+.col-11 { flex: 0 0 91.666667%; }
+.col-12 { flex: 0 0 100%; }
+
+@media (max-width: $breakpoint-md) {
+  .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, 
+  .col-7, .col-8, .col-9, .col-10, .col-11, .col-12 {
+    flex: 0 0 100%;
+  }
+}
