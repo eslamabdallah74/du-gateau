@@ -1,5 +1,5 @@
 {
-  "name": "du-gateau-bakery",
+  "name": "du-gateau",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -22,7 +22,9 @@
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@types/node": "^22.15.21",
     "@vitejs/plugin-vue": "^5.1.3",
+    "gh-pages": "^6.3.0",
     "sass": "^1.69.5",
     "typescript": "^5.5.3",
     "vite": "^5.4.2",

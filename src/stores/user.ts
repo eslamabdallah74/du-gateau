@@ -5,7 +5,7 @@ import type { User } from '@/types';
 export const useUserStore = defineStore('user', () => {
   const user = ref<User | null>(null);
   
-  function login(email: string, password: string) {
+  function login(email: string, _password: string) {
     // In a real app, this would make an API call
     // For demo purposes, we'll just simulate a successful login
     user.value = {
@@ -24,7 +24,7 @@ export const useUserStore = defineStore('user', () => {
     return Promise.resolve();
   }
   
-  function register(firstName: string, lastName: string, email: string, password: string) {
+  function register(firstName: string, lastName: string, email: string, _password: string) {
     // In a real app, this would make an API call
     // For demo purposes, we'll just simulate a successful registration
     user.value = {

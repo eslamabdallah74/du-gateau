@@ -103,7 +103,7 @@ const handleHover = (index: number) => {
   hoveredIndex.value = index;
 };
 
-const handleLeave = (index: number) => {
+const handleLeave = (_index: number) => {
   hoveredIndex.value = -1;
 };
 </script>

@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, /* onMounted */ } from 'vue';
 import CategorySection from '@/components/CategorySection.vue';
 import PromoSection from '@/components/PromoSection.vue';
 import TestimonialSection from '@/components/TestimonialSection.vue';
