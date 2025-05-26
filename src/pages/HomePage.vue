@@ -14,26 +14,8 @@
     </div>
     
     <div class="container">
-      <div class="features-section">
-        <div class="feature">
-          <div class="feature-icon">
-            <font-awesome-icon icon="birthday-cake" />
-          </div>
-          <h3>Product Details</h3>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <font-awesome-icon icon="truck" />
-          </div>
-          <h3>Fast Delivery</h3>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">
-            <font-awesome-icon icon="concierge-bell" />
-          </div>
-          <h3>Services</h3>
-        </div>
-      </div>
+
+      <FeaturesSection />
       
       <CategorySection 
         title="Our Best Sellers"
@@ -65,6 +47,7 @@ import { ref, onMounted } from 'vue';
 import CategorySection from '@/components/CategorySection.vue';
 import PromoSection from '@/components/PromoSection.vue';
 import TestimonialSection from '@/components/TestimonialSection.vue';
+import FeaturesSection from '@/components/FeaturesSection.vue';
 import { getFeaturedProducts, getBestsellerProducts } from '@/data/products';
 
 const featuredProducts = ref(getFeaturedProducts());

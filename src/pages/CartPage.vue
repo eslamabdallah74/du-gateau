@@ -2,14 +2,14 @@
   <div class="cart-page">
     <div class="container">
       <h1 class="script-text">Your Cart</h1>
-      
+
       <div v-if="cartStore.items.length > 0" class="cart-content">
         <div class="cart-items">
           <div v-for="item in cartStore.items" :key="item.product.id" class="cart-item">
             <div class="item-image">
               <img :src="item.product.image" :alt="item.product.name" />
             </div>
-            
+
             <div class="item-details">
               <h3 class="script-text">{{ item.product.name }}</h3>
               <p class="item-price">
@@ -21,70 +21,63 @@
                 </span>
               </p>
             </div>
-            
+
             <div class="item-quantity">
-              <button @click="decreaseQuantity(item.product.id)" class="quantity-button">
-                <mdi-icon name="minus" />
-              </button>
+              <button @click="decreaseQuantity(item.product.id)" class="quantity-button">➖</button>
               <span class="quantity">{{ item.quantity }}</span>
-              <button @click="increaseQuantity(item.product.id)" class="quantity-button">
-                <mdi-icon name="plus" />
-              </button>
+              <button @click="increaseQuantity(item.product.id)" class="quantity-button">➕</button>
             </div>
-            
+
             <div class="item-total">
               ${{ (getDiscountedPrice(item.product) * item.quantity).toFixed(2) }}
             </div>
-            
-            <button @click="removeItem(item.product.id)" class="remove-button">
-              <mdi-icon name="close" />
-            </button>
+
+            <button @click="removeItem(item.product.id)" class="remove-button">✖️</button>
           </div>
         </div>
-        
+
         <div class="cart-summary">
           <h2>Order Summary</h2>
-          
+
           <div class="summary-item">
             <span>Subtotal</span>
             <span>${{ cartStore.total.toFixed(2) }}</span>
           </div>
-          
+
           <div class="summary-item">
             <span>Shipping</span>
             <span>$5.00</span>
           </div>
-          
+
           <div class="summary-item">
             <span>Tax</span>
             <span>${{ (cartStore.total * 0.1).toFixed(2) }}</span>
           </div>
-          
+
           <div class="summary-total">
             <span>Total</span>
             <span>${{ (cartStore.total + 5 + cartStore.total * 0.1).toFixed(2) }}</span>
           </div>
-          
+
           <div class="promo-code">
             <input type="text" placeholder="Promo Code" v-model="promoCode" />
             <button @click="applyPromoCode">Apply</button>
           </div>
-          
+
           <button @click="checkout" class="checkout-button">
             Proceed to Checkout
           </button>
-          
+
           <div class="continue-shopping">
             <router-link to="/menu">
-              <mdi-icon name="arrow-left" />
-              Continue Shopping
+              ← Continue Shopping
             </router-link>
           </div>
         </div>
       </div>
-      
+
       <div v-else class="empty-cart">
-        <mdi-icon name="cart" class="empty-cart-icon" size="48" />
+        <div class="empty-cart-icon">🛒</div>
         <h2>Your cart is empty</h2>
         <p>Looks like you haven't added any items to your cart yet.</p>
         <router-link to="/menu" class="shopping-button">Start Shopping</router-link>
