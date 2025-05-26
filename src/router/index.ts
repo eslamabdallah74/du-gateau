@@ -5,6 +5,7 @@ import MenuPage from '../pages/MenuPage.vue';
 import ContactPage from '../pages/ContactPage.vue';
 import ProductDetailPage from '../pages/ProductDetailPage.vue';
 import CartPage from '../pages/CartPage.vue';
+import WishlistPage from '../pages/WishlistPage.vue';
 
 const routes = [
   {
@@ -42,6 +43,12 @@ const routes = [
     name: 'Cart',
     component: CartPage,
     meta: { title: 'Your Cart - Du Gâteau' }
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    component: WishlistPage,
+    meta: { title: 'Your Wishlist - Du Gâteau' }
   }
 ];
 

@@ -14,13 +14,13 @@
         
         <div class="footer-section logo-section">
           <div class="footer-logo">
-            <img src="https://images.pexels.com/photos/5946083/pexels-photo-5946083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Du Gâteau" />
+            <img src="@/assets/logo.png" alt="Du Gâteau" />
             <h2 class="script-text">Du Gâteau</h2>
           </div>
           <div class="social-links">
-            <a href="#" class="social-link"><font-awesome-icon icon="facebook" /></a>
-            <a href="#" class="social-link"><font-awesome-icon icon="twitter" /></a>
-            <a href="#" class="social-link"><font-awesome-icon icon="instagram" /></a>
+            <a href="#" class="social-link"><span class="icon">📘</span></a>
+            <a href="#" class="social-link"><span class="icon">🐦</span></a>
+            <a href="#" class="social-link"><span class="icon">📷</span></a>
           </div>
           <p class="footer-contact">Working hours from 9 AM to 9 PM, Monday to Sunday</p>
         </div>
@@ -148,6 +148,11 @@ const validateEmail = (email: string): boolean => {
         background-color: rgba(255, 255, 255, 0.2);
         color: $white;
         transition: background-color $transition-normal;
+        
+        .icon {
+          font-size: 1.2rem;
+          line-height: 1;
+        }
         
         &:hover {
           background-color: rgba(255, 255, 255, 0.4);

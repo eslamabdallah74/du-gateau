@@ -1,14 +1,13 @@
 <template>
-  <header class="header" :class="{ 'scrolled': isScrolled }">
+  <header class="header" ref="headerRef" :class="{ 'scrolled': isScrolled }">
     <div class="container">
       <div class="header-content">
         <div class="logo-container">
           <router-link to="/" class="logo">
-            <img src="https://images.pexels.com/photos/5946083/pexels-photo-5946083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Du Gâteau" />
-            <span class="logo-text script-text">Du Gâteau</span>
+            <img src="@/assets/logo.png" alt="Du Gâteau" />
           </router-link>
         </div>
-        
+
         <nav class="navigation">
           <ul class="nav-links">
             <li><router-link to="/">HOME</router-link></li>
@@ -18,7 +17,7 @@
           </ul>
           <button class="order-now-button">ORDER NOW</button>
         </nav>
-        
+
         <div class="header-actions">
           <button class="icon-button" @click="toggleUserDropdown">
             <span class="icon">👤</span>
@@ -39,14 +38,14 @@
           </button>
         </div>
       </div>
-      
+
       <div v-if="showSearch" class="search-bar">
         <input type="text" placeholder="Search for products..." v-model="searchQuery" @keyup.enter="search" />
         <button @click="search">
           <span class="icon">🔍</span>
         </button>
       </div>
-      
+
       <div v-if="showUserDropdown" class="user-dropdown">
         <div v-if="userStore.user">
           <p>Hello, {{ userStore.user.firstName }}</p>
@@ -63,91 +62,94 @@
       </div>
     </div>
   </header>
+
+  <div ref="intersectSection" style="height: 1px"></div>
+  <div :style="{ height: headerHeight + 'px' }"></div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useCartStore } from '../stores/cart';
-import { useWishlistStore } from '../stores/wishlist';
-import { useUserStore } from '../stores/user';
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useCartStore } from '../stores/cart'
+import { useWishlistStore } from '../stores/wishlist'
+import { useUserStore } from '../stores/user'
 
-const router = useRouter();
-const cartStore = useCartStore();
-const wishlistStore = useWishlistStore();
-const userStore = useUserStore();
+const router = useRouter()
+const cartStore = useCartStore()
+const wishlistStore = useWishlistStore()
+const userStore = useUserStore()
 
-const showSearch = ref(false);
-const showUserDropdown = ref(false);
-const searchQuery = ref('');
-const isScrolled = ref(false);
+const showSearch = ref(false)
+const showUserDropdown = ref(false)
+const searchQuery = ref('')
+const isScrolled = ref(false)
 
-let ticking = false;
-let lastScrollY = 0;
-const scrollDownThreshold = 60;
-const scrollUpThreshold = 30;
-let previousScrollState = false;
+const headerRef = ref<HTMLElement | null>(null)
+const intersectSection = ref<HTMLElement | null>(null)
+const headerHeight = ref(0)
 
-const handleScroll = () => {
-  isScrolled.value = window.scrollY > 60;
-  console.log('isScrolled', isScrolled.value);
-  console.log('window.scrollY', window.scrollY);
-  
-};
-
+const updateHeaderHeight = () => {
+  if (headerRef.value) {
+    headerHeight.value = headerRef.value.offsetHeight
+  }
+}
 
 onMounted(() => {
-  // Initial check
-  isScrolled.value = window.scrollY > scrollDownThreshold;
-  previousScrollState = isScrolled.value;
-  // Use passive listener for better performance
-  window.addEventListener('scroll', handleScroll, { passive: true });
-});
+  updateHeaderHeight()
+  window.addEventListener('resize', updateHeaderHeight)
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      isScrolled.value = !entry.isIntersecting
+    },
+    { root: null, threshold: 0 }
+  )
+
+  if (intersectSection.value) observer.observe(intersectSection.value)
+})
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
+  window.removeEventListener('resize', updateHeaderHeight)
+})
 
 const toggleSearchBar = () => {
-  showSearch.value = !showSearch.value;
-  if (showUserDropdown.value) showUserDropdown.value = false;
-};
+  showSearch.value = !showSearch.value
+  if (showUserDropdown.value) showUserDropdown.value = false
+}
 
 const toggleUserDropdown = () => {
-  showUserDropdown.value = !showUserDropdown.value;
-  if (showSearch.value) showSearch.value = false;
-};
+  showUserDropdown.value = !showUserDropdown.value
+  if (showSearch.value) showSearch.value = false
+}
 
-const toggleSettings = () => {
-  // Implementation for settings
-};
+const toggleSettings = () => {}
 
 const search = () => {
   if (searchQuery.value.trim()) {
-    router.push({ path: '/search', query: { q: searchQuery.value } });
-    showSearch.value = false;
-    searchQuery.value = '';
+    router.push({ path: '/search', query: { q: searchQuery.value } })
+    showSearch.value = false
+    searchQuery.value = ''
   }
-};
+}
 
 const openCart = () => {
-  router.push('/cart');
-};
+  router.push('/cart')
+}
 
 const openWishlist = () => {
-  router.push('/wishlist');
-};
+  router.push('/wishlist')
+}
 
 const navigateTo = (path: string) => {
-  router.push(path);
-  showUserDropdown.value = false;
-};
+  router.push(path)
+  showUserDropdown.value = false
+}
 
 const logout = () => {
-  userStore.logout();
-  showUserDropdown.value = false;
-  router.push('/');
-};
+  userStore.logout()
+  showUserDropdown.value = false
+  router.push('/')
+}
 </script>
 
 <style scoped lang="scss">
@@ -219,6 +221,15 @@ const logout = () => {
       padding: 0.5rem;
       border-radius: 50%;
       transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      
+      .icon {
+        font-size: 1.4rem;
+      }
       
       &:hover {
         color: $primary-dark;
@@ -343,9 +354,16 @@ const logout = () => {
       border-radius: $border-radius-sm;
       padding: $spacing-sm $spacing-md;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .icon {
+        font-size: 1.2rem;
+      }
       
       &:hover {
-        background-color: $primary-dark;
+        background-color: darken-color($primary, 10);
       }
     }
   }

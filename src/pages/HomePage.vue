@@ -36,7 +36,7 @@
       </div>
       
       <CategorySection 
-        title="Our Bestsellers"
+        title="Our Best Sellers"
         :products="bestsellerProducts"
         view-all-link="/menu"
       />

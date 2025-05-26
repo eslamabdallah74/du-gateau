@@ -7,13 +7,13 @@
       </div>
       <div class="product-actions" :class="{ 'show': hovered }">
         <button @click.stop="addToCart" class="action-button">
-          <font-awesome-icon icon="shopping-cart" />
+          <span class="icon">🛒</span>
         </button>
         <button @click.stop="toggleWishlist" class="action-button" :class="{ 'active': isInWishlist }">
-          <font-awesome-icon icon="heart" />
+          <span class="icon">❤️</span>
         </button>
         <button @click.stop="viewDetails" class="action-button">
-          <font-awesome-icon icon="eye" />
+          <span class="icon">👁️</span>
         </button>
       </div>
     </div>
@@ -148,6 +148,13 @@ const viewDetails = () => {
         justify-content: center;
         cursor: pointer;
         transition: background-color $transition-normal, color $transition-normal;
+        border: none;
+        padding: 0;
+        
+        .icon {
+          font-size: 1.2rem;
+          line-height: 1;
+        }
         
         &:hover, &.active {
           background-color: $primary;
